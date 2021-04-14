@@ -1,0 +1,10 @@
+-- Datenbanken Praktikum WS 2019/20
+-- Aufgabe 8e
+
+select distinct name 
+from (select m.movieid, writerid 
+      from dbmaster.movies as m join dbmaster.movies2writers as mw 
+      on m.year >= 1920 and m.year <= 1929 and m.movieid = mw.movieid) as Mid, 
+      dbmaster.writers as w 
+where Mid.writerid = w.writerid
+

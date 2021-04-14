@@ -1,0 +1,9 @@
+--aufgabe 6b
+create view dbp050.waltDisneyMovies as
+	select m.movieid as MOVIEID, m.title as TITLE, g.genre as GENRE
+	from dbmaster.movies m, dbmaster.movies2producers n, dbmaster.producers o, dbmaster.genres g
+	where m.movieid=g.movieid 
+	and m.movieid=n.movieid 
+	and n.producerid = o.producerid
+	and o.name = 'Disney, Walt'
+;

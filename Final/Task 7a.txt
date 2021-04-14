@@ -1,0 +1,7 @@
+--Aufgabe 7a
+
+select a.TITLE, b.YEAR, b.MAX_RANK from dbp050.avgRatedMovies as a 
+inner join (select YEAR, max(rank) as MAX_RANK from dbp050.avgRatedMovies group by year) as b 
+on a.year=b.year and a.rank=b.max_rank 
+order by year
+;

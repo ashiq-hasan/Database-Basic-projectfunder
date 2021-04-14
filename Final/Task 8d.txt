@@ -1,0 +1,13 @@
+-- Datenbanken Praktikum WS 2019/20
+-- Aufgabe 8d
+
+select distinct name 
+from (select name, movieid 
+      from dbmaster.directors as d, 
+      dbmaster.movies2directors as md 
+      where d.directorid = md.directorid 
+intersect 
+      select name, movieid 
+      from dbmaster.actors as a, 
+      dbmaster.movies2actors as ma 
+      where a.actorid = ma.actorid)

@@ -1,0 +1,16 @@
+-- Datenbanken Praktikum WS 2019/20
+-- Aufgabe 8c
+
+
+select distinct count(actorid) as Amount, title 
+from dbmaster.movies2actors as ma, dbmaster.movies as m 
+where ma.movieid = m.movieid group by title 
+except 
+select distinct A1, Anz.title 
+from (select count(actorid) as A1, m.movieid, title 
+      from dbmaster.movies2actors as ma, dbmaster.movies as m 
+      where ma.movieid = m.movieid group by m.movieid, title) as Anz, 
+        (select count(actorid) as A2, m.movieid, title 
+         from dbmaster.movies2actors as ma, dbmaster.movies as m 
+         where ma.movieid = m.movieid group by m.movieid, title) as Anz2 
+      where A1 < A2

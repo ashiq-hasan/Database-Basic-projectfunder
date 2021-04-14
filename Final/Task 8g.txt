@@ -1,0 +1,9 @@
+-- Datenbanken Praktikum WS 2019/20
+-- Aufgabe 8g
+
+select distinct genre, M as Movies_Per_Genre, ((M*1.0)/(S*1.0))*100 as Market_Share 
+from (select count(*) as M, genre 
+      from dbmaster.genres group by genre) as Anz, 
+      (select sum(M2) as S 
+       from (select count(*) as M2, genre 
+             from dbmaster.genres group by genre) as Anz2) as SM

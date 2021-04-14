@@ -1,0 +1,8 @@
+--Aufgabe 6a
+create view dbp050.avgRatedMovies as
+	select m.movieid as MOVIEID, m.title as TITLE, m.year as YEAR, r.rank as RANK
+	from dbmaster.movies m, dbmaster.ratings r 
+	where m.movieid = r.movieid 
+	and 
+	r.votes > (select avg(votes) from dbmaster.ratings)
+;

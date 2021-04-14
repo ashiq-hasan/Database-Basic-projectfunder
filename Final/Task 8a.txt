@@ -1,0 +1,10 @@
+-- Datenbanken Praktikum WS 2019/20
+-- Aufgabe 8a
+
+select ACA as Amount
+from (select avg(CA) as ACA, genre 
+      from (select count(actorid) as CA, g.movieid, genre 
+            from dbmaster.movies2actors as ma, dbmaster.genres as g 
+            where ma.movieid = g.movieid and genre = 'Horror' 
+            group by g.movieid, genre) as Anz 
+      group by genre) as Anz2"

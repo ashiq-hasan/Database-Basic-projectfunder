@@ -1,0 +1,43 @@
+--Aufgabe 5
+
+ssh dbp050@atlas.is.inf.uni-due.de
+dbp050@atlas.is.inf.uni-due.de's password:
+
+db2start
+
+db2 catalog tcpip node sample remote bijou.is.inf.uni-due.de server 50005 remote_instance dbmaster system bijou ostype linux
+
+db2 catalog database IMDB as mygeo at node sample
+
+db2 list db directory
+
+ Systemdatenbankverzeichnis
+
+ Anzahl Einträge im Verzeichnis = 1
+
+Eintrag für Datenbank 1:
+
+ Aliasname der Datenbank                                         = MYGEO
+ Datenbankname                                                   = IMDB
+ Knotenname                                                      = SAMPLE
+ Release-Level der Datenbank                                     = d.00
+ Kommentar                                                       =
+ Verzeichniseintragungsart                                       = Fern
+ Datenbankpartitionsnummer für Katalog                           = -1
+ Hostname des Alternativservers                                  =
+ Portnummer des Alternativservers                                =
+
+db2 list node directory
+
+ Knotenverzeichnis
+
+ Anzahl Einträge im Verzeichnis = 1
+
+Eintrag für Knoten 1:
+
+ Knotenname                                                      = SAMPLE
+ Kommentar                                                       =
+ Verzeichniseintragungsart                                       = LOCAL
+ Protokoll                                                       = TCPIP
+ Hostname                                                        = bijou.is.inf.uni-due.de
+ Servicename                                                     = 50005

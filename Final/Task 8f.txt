@@ -1,0 +1,14 @@
+-- Datenbanken Praktikum WS 2019/20
+-- Aufgabe 8f
+
+(select title, year, name, 'director' as Role 
+ from (select title, year, directorid 
+       from dbmaster.movies as m, dbmaster.movies2directors as md 
+       where m.movieid = md.movieid) as DN, dbmaster.directors as d 
+       where DN.directorid = d.directorid order by title desc) 
+union 
+(select title, year, name, 'actor' as Role 
+ from (select title, year, actorid 
+       from dbmaster.movies as m,dbmaster.movies2actors as ma 
+       where m.movieid = ma.movieid) as AN, dbmaster.actors as a 
+ where AN.actorid = a.actorid order by title desc)

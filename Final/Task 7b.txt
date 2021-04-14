@@ -1,0 +1,8 @@
+--Aufgabe 7b
+
+select TITLE, count(GENRE) as AMOUNT 
+from dbp050.waltDisneyMovies 
+group by TITLE 
+having count(GENRE) <= 2
+;
+

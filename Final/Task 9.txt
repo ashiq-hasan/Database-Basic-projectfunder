@@ -1,0 +1,28 @@
+-- Datenbanken Praktikum WS 2019/20
+-- Aufgabe 9
+
+
+with rec
+     as (select m.actorid,
+                m.movieid,
+                0 as Level
+         from   dbmaster.movies2actors m
+                join dbmaster.actors a
+                  on a.actorid = m.actorid
+         where  a.name = 'Bacon, Kevin'
+         union all
+         select m1.actorid,
+                m2.movieid,
+                ramen.level + 1
+         from   rec ramen
+                join dbmaster.movies2actors m1
+                  on m1.movieid = ramen.movieid
+                     and ramen.level < 2
+                join dbmaster.movies2actors m2
+                  on m1.actorid = m2.actorid)
+select *
+from dbmaster.actors
+where actorid in (select actorid
+              from   rec
+              group by actorid
+              having MIN(level) = 2);

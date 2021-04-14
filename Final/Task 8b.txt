@@ -1,0 +1,14 @@
+-- Datenbanken Praktikum WS 2019/20
+-- Aufgabe 8b
+
+select name, AG2 as Mean_Gross 
+from (select directorid, avg(AG) as AG2 
+      from (select avg(gross) as AG, movieid 
+            from dbmaster.directors as d, dbmaster.movies2directors as md 
+            where d.directorid = md.directorid group by movieid) as AM, 
+            dbmaster.movies2directors as md2 
+      where AM.movieid = md2.movieid 
+      group by directorid) as AM2, 
+      dbmaster.directors as d2 
+ where AM2.directorid = d2.directorid 
+ order by AG2 desc

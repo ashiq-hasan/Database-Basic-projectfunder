@@ -1,0 +1,18 @@
+-- Datenbanken Praktikum WS 2019/20
+-- Aufgabe 10
+
+
+CREATE trigger dbp050.trigger1
+AFTER INSERT ON dbp050.frequentratedmovies 
+FOR EACH ROW  MODE DB2SQL
+when (new.votes = 100)
+update dbp050.frequentratedmovies
+set movieid=(select movieid from dbmaster.ratings where new.votes=100),title=(SELECT title from dbmaster.movies join dbmaster.ratings on dbmaster.movies.movieid=old.movieid where new.notes= 100),year=(SELECT year from dbmaster.movies m join dbmaster.ratings on dbmaster.movies.movieid=old.movieid)
+where (new.notes =100);
+
+CREATE trigger dbp050.trigger2
+AFTER  delete ON dbp050.frequentratedmovies 
+FOR EACH ROW  MODE DB2SQL
+when (new.votes < 100)
+Delete from dbp050.frequentratedmovies
+where (new.notes <100);
